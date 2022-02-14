@@ -1,6 +1,9 @@
 pipeline {
 
   agent any
+  stages{
+
+  
   stage("Create dockerimage"){
     steps{
       sh "docker build -t vinayadav99/newapp:${BUILD_ID} ."
@@ -24,5 +27,6 @@ pipeline {
       } 
       
     }
+  }
   }
 }
