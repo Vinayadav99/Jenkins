@@ -23,7 +23,14 @@ pipeline {
       sh "sh myscript.sh ${BUILD_ID}"
       sshagent(['ubuntu']) {
         sh "scp -o StrictHostKeyChecking=no newdep.yaml ubuntu@52.66.201.78:/home/ubuntu"
-        sh "ssh ubuntu@52.66.201.78 kubectl create -f newdep.yaml"
+        script{
+          try{
+            sh "ssh ubuntu@52.66.201.78 kubectl create -f newdep.yaml"
+          }catch(error){
+             sh "ssh ubuntu@52.66.201.78 kubectl apply -f newdep.yaml"
+          }
+        }
+
       } 
       
     }
