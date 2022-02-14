@@ -10,7 +10,7 @@ pipeline {
     steps{
       withCredentials([string(credentialsId: 'mypass', variable: 'pass')]) {
         sh "docker login -u vinayadav99 -p ${pass}"
-        sh docker push vinayadav99/newapp:${BUILD_ID}"
+        sh "docker push vinayadav99/newapp:${BUILD_ID}"
       }
     }
   }
